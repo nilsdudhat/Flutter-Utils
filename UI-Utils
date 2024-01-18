@@ -1,0 +1,8 @@
+
+Manage Keyboard visibility
+if (MediaQuery.of(context).viewInsets.bottom == 0) {
+    // keyboard no visible
+} else {
+    // keyboard visible
+    FocusManager.instance.primaryFocus?.unfocus() // hide keyboard from the screen
+}
