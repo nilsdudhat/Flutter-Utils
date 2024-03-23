@@ -1,0 +1,16 @@
+
+
+/// to get periodic callback on given duration interval
+static Timer getPeriodicCallback({
+    required Duration duration,
+    required Function() onTick,
+  }) {
+    final timer = Timer.periodic(
+      duration,
+      (timer) {
+        onTick.call();
+      },
+    );
+
+    return timer;
+}
