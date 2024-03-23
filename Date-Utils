@@ -9,3 +9,35 @@ static int getDaysInMonth(int year, int month) {
     const List<int> daysInMonth = <int>[31, -1, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     return daysInMonth[month - 1];
 }
+
+/// get converted DateTime format
+static String? getConvertedDateFormat({
+    DateTime? dateTime,
+    String? date,
+    String? givenFormat,
+    required String requiredFormat,
+}) {
+    /// d = 3, dd = 03
+    /// MMMM = July, MMM = Jul, MM = 07
+    /// yyyy = 2000
+    /// hh:mm:ss a = 02:12:63 PM, HH:mm:ss = 14:12:63
+    /// EEEE = Tuesday, EEE = Tue
+    try {
+      if (dateTime == null && date == null) {
+       return null;
+      }
+      if (dateTime != null) {
+        DateFormat formatter = DateFormat(requiredFormat);
+        return formatter.format(dateTime);
+      }
+      if (date != null) {
+        DateTime tmpDateTime = DateFormat(givenFormat).parse(date);
+        DateFormat formatter = DateFormat(requiredFormat);
+        return formatter.format(tmpDateTime);
+      }
+      return null;
+    } catch(error) {
+      log("--error-- getConvertedDateFormat: $error");
+      return null;
+    }
+}
